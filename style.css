@@ -1,0 +1,546 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-container {
+    width: 500px;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transition: 0.3s ease;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+p {
+    text-align: center;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.input-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 110px 145px 75px;
+    gap: 8px;
+}
+
+#dueDate {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+}
+#taskInput {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#addTask {
+    width: 100%;
+    padding: 12px 10px;
+    border: none;
+    border-radius: 8px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+#addTask:hover {
+    background: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.task-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+#taskList {
+    list-style: none;
+    margin-top: 20px;
+}
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fafafa;
+    padding: 14px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+    animation: taskAppear 0.3s ease;
+    transition: 0.2s ease;
+}
+
+.task-item span {
+    flex: 1;
+    color: #333;
+}
+
+.complete-btn,
+.edit-btn,
+.delete-btn {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.complete-btn {
+    background: #e3f7e5;
+    color: #2e7d32;
+}
+.delete-btn {
+    background: #ffe5e5;
+    color: #c62828;
+}
+
+.completed span {
+    text-decoration: line-through;
+    color: #999;
+}
+.edit-btn {
+    border: none;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #e8e8ff;
+    color : #444
+}
+.search-section {
+    margin-top: 20px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+#searchInput:focus {
+    border-color: #333;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    background: #eeeeee;
+    color: #444;
+}
+
+.filter-btn:hover {
+    background: #dddddd;
+}
+
+.active-filter {
+    background: #333;
+    color: white;
+}
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.filter-btn {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    background: #eeeeee;
+    color: #444;
+    font-size: 14px;
+}
+
+.filter-btn:hover {
+    background: #dddddd;
+}
+
+.active-filter {
+    background: #333;
+    color: white;
+}
+
+#darkModeBtn {
+    display: block;
+    margin-left: auto;
+    margin-bottom: 15px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #333;
+    color: white;
+}
+body.dark-mode {
+    background: #181818;
+}
+
+body.dark-mode .todo-container {
+    background: #242424;
+}
+
+body.dark-mode h1 {
+    color: white;
+}
+
+body.dark-mode p {
+    color: #bbb;
+}
+
+body.dark-mode #taskInput,
+body.dark-mode #searchInput {
+    background: #333;
+    color: white;
+    border-color: #555;
+}
+
+body.dark-mode #taskInput::placeholder,
+body.dark-mode #searchInput::placeholder {
+    color: #aaa;
+}
+
+body.dark-mode .task-stats {
+    color: #ccc;
+}
+
+body.dark-mode .task-item {
+    background: #333;
+    border-color: #444;
+}
+
+body.dark-mode .task-item span {
+    color: white;
+}
+
+body.dark-mode .filter-btn {
+    background: #444;
+    color: white;
+}
+
+body.dark-mode .active-filter {
+    background: white;
+    color: #222;
+}
+#clearCompleted {
+    width: 100%;
+    margin-top: 12px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #f1f1f1;
+    color: #444;
+}
+
+#clearCompleted:hover {
+    background: #ddd;
+}
+
+
+
+.todo-container {
+    transition: 0.3s ease;
+}
+
+#addTask {
+    transition: 0.2s ease;
+}
+
+#addTask:hover {
+    background: #555;
+    transform: translateY(-1px);
+}
+
+.complete-btn,
+.edit-btn,
+.delete-btn {
+    transition: 0.2s ease;
+}
+
+.complete-btn:hover {
+    background: #c8edcc;
+    transform: translateY(-1px);
+}
+
+.edit-btn:hover {
+    background: #dadaff;
+    transform: translateY(-1px);
+}
+
+.delete-btn:hover {
+    background: #ffcaca;
+    transform: translateY(-1px);
+}
+
+.filter-btn {
+    transition: 0.2s ease;
+}
+
+#clearCompleted {
+    transition: 0.2s ease;
+}
+
+#darkModeBtn {
+    transition: 0.2s ease;
+}
+
+#darkModeBtn:hover {
+    opacity: 0.85;
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .todo-container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .input-section {
+         grid-template-columns: 1fr;
+         gap: 10px;
+    }
+
+    #prioritySelect,
+    #dueDate,
+    #addTask {
+         width: 100%;
+    }
+
+    #addTask {
+        width: 100%;
+    }
+
+    .task-stats {
+        font-size: 12px;
+        gap: 8px;
+    }
+
+    .task-item {
+        flex-wrap: wrap;
+    }
+    .task-item {
+        gap: 8px;
+    }
+
+    .task-item small {
+        font-size: 10px;
+    }
+
+    .task-item span {
+        width: 100%;
+        margin-bottom: 5px;
+        word-break: break-word;
+    }
+    .complete-btn,
+    .edit-btn,
+    .delete-btn {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .filter-buttons {
+        gap: 6px;
+    }
+
+    .filter-btn {
+        font-size: 12px;
+        padding: 8px 5px;
+    }
+
+
+}
+
+
+@keyframes taskAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.task-item {
+    animation: taskAppear 0.3s ease;
+}
+
+
+#emptyMessage {
+    text-align: center;
+    padding: 20px;
+    color: #888;
+    font-size: 14px;
+    list-style: none;
+}
+
+
+#prioritySelect {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+}
+
+body.dark-mode #prioritySelect {
+    background: #333;
+    color: white;
+    border-color: #555;
+}
+/* ===== PRIORITY BADGES ===== */
+
+.task-item small {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.priority-low {
+    color: green;
+    background: #cbf1cb;
+}
+
+.priority-medium {
+    color: #280996;
+    background: #e0d7f3;
+}
+
+.priority-high {
+    color: #c62828;
+    background: #f1d4d4;
+}
+/* ===== TASK HOVER EFFECT ===== */
+
+.task-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
+}
+.due-date {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #555;
+    background: #eeeeee;
+}
+.overdue {
+    color: #c62828;
+    background: #ffe0e0;
+}
+
+.today-date {
+    color: #1565c0;
+    background: #e3f2fd;
+}
+
+.upcoming-date {
+    color: #2e7d32;
+    background: #e8f5e9;
+}
+
+body.dark-mode .due-date {
+    color: #ddd;
+    background: #444;
+}
+.priority-filters {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.priority-filter {
+    flex: 1;
+    padding: 8px 5px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    background: #eeeeee;
+    color: #444;
+    font-size: 13px;
+    transition: 0.2s ease;
+}
+
+.priority-filter:hover {
+    background: #dddddd;
+}
+
+.active-priority {
+    background: #333;
+    color: white;
+}
+body.dark-mode .priority-filter {
+    background: #444;
+    color: white;
+}
+
+body.dark-mode .active-priority {
+    background: white;
+    color: #222;
+}
